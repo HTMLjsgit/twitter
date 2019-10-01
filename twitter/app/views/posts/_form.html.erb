@@ -1,0 +1,22 @@
+<%= form_for(@post) do |f| %>
+<p><%= f.label :twitterのIDまたは名前, class: 'title' %></p>
+<p><%= f.text_field :title , class: 'text' %></p>
+<p><%= f.label :本文 %></p>
+<p><%= f.text_area :body , class: 'body'%></p>
+<p><%= f.submit :送信 , class: 'sub' %></p>
+<% end %>
+
+<style>
+	body{
+	}
+	.body,
+	.text{
+		width: 600px;
+	}
+	.text{
+		height: 20px;
+	}
+	.body{
+		height: 300px;
+	}
+	</style>

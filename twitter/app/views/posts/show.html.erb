@@ -1,0 +1,23 @@
+<div id="box">
+<h1><%= @post.title %></h1>
+<p><%= @post.body %></p>
+<%= @post.comments.each do |comment| %>
+	<p><%= comment.body %></p>
+<% end %>
+
+<%= form_tag(comments_path, method: :post) do %>
+<%= text_field_tag :body %>
+<%= hidden_field_tag :post_id, :value => @post.id %>
+<%= submit_tag :送信 %>
+<% end %>
+</div>
+
+
+
+<style>
+	#box{
+		background: white;
+		width: 1348px ;
+		height: 600px;
+	}
+	</style>

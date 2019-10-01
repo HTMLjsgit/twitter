@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<% if user_signed_in? %>
+  	 	<div id="box2">
+  	<h3 class="top"><%= link_to '[HOME]', root_path ,class: 'top'%></h3>
+  	<% if current_user.name? %> 
+  	<h4 class="name" id="named">名前:　<%= current_user.name %></h4>
+  	<% end %>
+  <h4 class="name" id="named2"> メールアドレス： <%= current_user.email %></h4>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'post' %>
+</div>
+<% else %>
+<div id="box2">
+	<h3 class="top"><%= link_to '[HOME]', root_path , class: 'top'%></h3>
+	<h4 class="rogin"> 現在ログインしていません </h4>
+  <%= link_to "ログイン", new_user_session_path, class: 'post' %> <!-- ログイン画面に移行する -->
+  <%= link_to "新規登録", new_user_registration_path, class: 'post' %> <!-- 新規登録画面に移行する -->
+</div>
+<% end %>
+  
+   <%= yield %>
+   <style>
+   	body{
+   		background:#afeeee;
+	
+   	}
+	.name,
+	.top{
+		float: top;
+		display:inline-block
+	}
+	#named2,
+	#named{
+		margin-left: 50px;
+		color: #696969;
+	}
+	#box2{
+	border: 1px solid #808080;
+	}
+	.rogin,
+	.post{
+		display: inline-block;
+	}
+	.post:hover{
+	color: red;
+		background: black;
+	}
+	.top:hover{
+		color: red;
+		background: black;
+	}
+	.post{
+		margin-left: 30px;
+	}
+	#box2{
+		background:#b0c4de;
+	}
+	#box{
+		background: white;
+	}
+	.rogin{
+		margin-left: 20px;
+	}
+   </style>
+  </body>
+</html>
