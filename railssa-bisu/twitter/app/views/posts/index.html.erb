@@ -1,0 +1,80 @@
+<h2>Twitterフォロー宣伝</h2>
+<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
+  <!-- ユーザーがログインしていた時の処理 -->
+  <%= link_to '新規記事作成', new_post_path , class: 'new'%>
+	<% @posts.each do |post| %>
+	
+	<% if current_user.id == post.user_id %>
+<div id="box">
+	<h2 class="title2"><%= link_to post.title, post_path(post),class: 'title2'%></h2>
+	<%= link_to '[編集]', edit_post_path(post) ,class: 'edit' %>
+	<%= link_to '[X]', post_path(post) ,method: :delete ,class: 'x' %>
+	
+	<p><%= post.body %></p>
+	
+	<time datetime="<%= post.created_at %>">
+	<p class="time"><%= time_ago_in_words(post.created_at)%></p>
+	</time>
+	</div>
+	<% end %>
+	<% end %>
+
+	<% @posts.each do |post| %>
+	<% unless current_user.id == post.user_id %>
+	<div id="box">
+	<h2 class="title2"><%= link_to post.title, post_path(post),class: 'title2'%></h2>
+	<p><%= post.body %></p>
+
+	<time datetime="<%= post.created_at %>">
+	<p class="time"><%= time_ago_in_words(post.created_at)%></p>
+	</time>
+	</div>
+	<% end %>
+
+	<% end %>
+
+
+  <!-- ログアウトをする -->
+   
+<% else %>
+  <!-- ユーザーがログインしていなかった時の処理 -->
+ <% @posts.each do |post| %>
+   <div id="box">
+    
+	<h2 class="title2"><%= link_to post.title, post_path(post),class: 'title2' %></h2>
+	<p><%= post.body %></p>
+	<time datetime="<%= post.created_at %>">
+	<p class="time"><%= time_ago_in_words(post.created_at) %></p>
+	</time>
+</div>
+    <% end %>
+	<% end %>
+	
+	
+	<style>
+	.x:hover{
+	color: red;
+	background: black;
+	}
+	.edit:hover{
+	color: red;
+	background: black;
+	}
+	.new:hover{
+		color: red;
+		background: black;
+	}
+	.time{
+		color: #777777;
+	}
+	.title2,
+	.edit,
+	.x{
+		display:inline-block
+	}
+	.title2:hover{
+		color:red;
+		background: black;
+	}
+
+	</style>
